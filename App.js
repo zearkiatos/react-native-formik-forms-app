@@ -15,7 +15,7 @@ const validate = (values) => {
 export default function App() {
   const formik = useFormik({
     initialValues: {
-      email: "caprilespe@outlook.com"
+      email: ""
     },
     validate,
     onSubmit: (form) => console.warn(form)
@@ -24,11 +24,14 @@ export default function App() {
     <View style={styles.container}>
       <Text>Email</Text>
       <TextInput
+        onBlur={formik.handleBlur("email")}
         style={styles.input}
         onChangeText={formik.handleChange("email")}
         value={formik.values.email}
       />
-      {formik.errors.email ? <Text>{formik.errors.email}</Text> : null}
+      {formik.errors.email && formik.touched.email ? (
+        <Text>{formik.errors.email}</Text>
+      ) : null}
       <Button title="Submit" onPress={formik.handleSubmit} />
     </View>
   );
