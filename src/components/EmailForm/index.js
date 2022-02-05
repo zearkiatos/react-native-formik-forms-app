@@ -1,18 +1,15 @@
 import React, { Fragment } from "react";
-import { StyleSheet, Text, TextInput, Button } from "react-native";
+import { Text, Button, View } from "react-native";
 import { Formik, useFormikContext } from "formik";
 import * as Yup from "yup";
+import FieldText from "../FieldText";
 
 const Form = () => {
-  const { handleChange, submitForm, values } = useFormikContext();
+  const { submitForm } = useFormikContext();
   return (
     <Fragment>
       <Text>Email</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={handleChange("email")}
-        value={values.email}
-      />
+      <FieldText fieldName="email" />
       <Button onPress={submitForm} title="Submit" />
     </Fragment>
   );
@@ -22,7 +19,7 @@ const EmailForm = () => {
   return (
     <View>
       <Formik
-        initialValues={{ email: "" }}
+        onSubmit={(form) => console.log(form)}
         validationSchema={Yup.object({
           email: Yup.string().email("Invalid Email").required("Required")
         })}
@@ -32,13 +29,5 @@ const EmailForm = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  input: {
-    height: 50,
-    width: "100%",
-    backgroundColor: "#eee"
-  }
-});
 
 export default EmailForm;
