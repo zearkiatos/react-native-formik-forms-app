@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import * as Yup from "yup";
+import EmailForm from "./src/components/EmailForm";
 
 const validate = (values) => {
   const errors = {};
@@ -36,6 +37,8 @@ export default function App() {
         <Text>{formik.errors.email}</Text>
       ) : null}
       <Button title="Submit" onPress={formik.handleSubmit} />
+        <Text>Another Form</Text>
+        <EmailForm />
     </View>
   );
 }
