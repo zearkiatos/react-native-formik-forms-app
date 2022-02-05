@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import * as Yup from "yup";
 
 const validate = (values) => {
   const errors = {};
@@ -17,7 +18,9 @@ export default function App() {
     initialValues: {
       email: ""
     },
-    validate,
+    validationSchema: Yup.object({
+      email: Yup.string().email("Invalid Email").required("Required")
+    }),
     onSubmit: (form) => console.warn(form)
   });
   return (
