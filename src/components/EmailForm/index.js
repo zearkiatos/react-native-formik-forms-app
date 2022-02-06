@@ -10,6 +10,7 @@ const Form = () => {
     <Fragment>
       <Text>Email</Text>
       <FieldText fieldName="email" />
+      <FieldText fieldName="name" />
       <Button onPress={submitForm} title="Submit" />
     </Fragment>
   );
@@ -21,8 +22,13 @@ const EmailForm = () => {
       <Formik
         onSubmit={(form) => console.log(form)}
         validationSchema={Yup.object({
-          email: Yup.string().email("Invalid Email").required("Required")
+          email: Yup.string().email("Invalid Email").required("Required"),
+          name: Yup.string().min(10).required("Required")
         })}
+        initialValues={{
+          email: "",
+          name: ""
+        }}
       >
         <Form />
       </Formik>

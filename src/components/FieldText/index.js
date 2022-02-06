@@ -1,17 +1,20 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { TextInput, StyleSheet } from "react-native-web";
 import { useField } from "formik";
 
 const FieldText = ({ fieldName, ...props }) => {
-  const [field] = useField(fieldName);
-  console.log(field);
+  const [field, meta] = useField(fieldName);
   return (
-    <TextInput
-      style={styles.input}
-      onChangeText={field.onChange(fieldName)}
-      value={field.value}
-      {...props}
-    />
+    <Fragment>
+      <TextInput
+        style={styles.input}
+        onChangeText={field.onChange(fieldName)}
+        onBlur={field.onBlur(fieldName)}
+        value={field.value}
+        {...props}
+      />
+      {meta.error && meta.touched && <Text style={{ color: "red" }}></Text>}
+    </Fragment>
   );
 };
 
