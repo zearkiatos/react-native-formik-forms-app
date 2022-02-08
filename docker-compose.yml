@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: react-native-formik-forms-app
+    volumes:
+      - ".:/app"
+    env_file:
+      - ".env"
+    ports:
+      - "9006:19006"
+    tty: true
